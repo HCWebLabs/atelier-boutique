@@ -1,0 +1,2250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Curated collections of contemporary fashion from an independent boutique">
+  <title>Atelier — Independent Fashion Boutique</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-cream: oklch(96% 0.01 85);
+      --color-charcoal: oklch(25% 0.01 270);
+      --color-sage: oklch(65% 0.05 145);
+      --color-terracotta: oklch(58% 0.12 35);
+      --color-gold: oklch(75% 0.08 85);
+      --color-white: oklch(100% 0 0);
+      
+      --font-serif: 'Cormorant Garamond', serif;
+      --font-sans: 'Inter', -apple-system, system-ui, sans-serif;
+      
+      --spacing-xs: 0.5rem;
+      --spacing-sm: 1rem;
+      --spacing-md: 1.5rem;
+      --spacing-lg: 2.5rem;
+      --spacing-xl: 4rem;
+      
+      --transition-smooth: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    @supports (view-transition-name: none) {
+      ::view-transition-old(root),
+      ::view-transition-new(root) {
+        animation-duration: 0.4s;
+      }
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+    
+    body {
+      font-family: var(--font-sans);
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--color-charcoal);
+      background: var(--color-cream);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      min-height: 100vh;
+      min-height: 100svh;
+    }
+    
+    /* Header & Navigation */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--color-cream);
+      border-bottom: 1px solid oklch(85% 0.01 85);
+      backdrop-filter: blur(12px);
+      background: oklch(96% 0.01 85 / 0.95);
+    }
+    
+    .header-content {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: var(--spacing-sm) var(--spacing-md);
+      display: grid;
+      grid-template-columns: 44px 1fr 132px;
+      align-items: center;
+      gap: var(--spacing-sm);
+    }
+    
+    .logo {
+      font-family: var(--font-serif);
+      font-size: 1.75rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-decoration: none;
+      color: var(--color-charcoal);
+      transition: opacity var(--transition-smooth);
+      text-align: center;
+      justify-self: center;
+    }
+    
+    .logo:hover, .logo:focus-visible {
+      opacity: 0.7;
+    }
+    
+    .main-nav {
+      display: none;
+    }
+    
+    .nav-list {
+      display: flex;
+      gap: var(--spacing-lg);
+      list-style: none;
+    }
+    
+    .nav-link {
+      font-size: 0.9375rem;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      text-decoration: none;
+      color: var(--color-charcoal);
+      position: relative;
+      transition: color var(--transition-smooth);
+    }
+    
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--color-charcoal);
+      transition: width var(--transition-smooth);
+    }
+    
+    .nav-link:hover::after,
+    .nav-link:focus-visible::after {
+      width: 100%;
+    }
+    
+    .nav-link:focus-visible {
+      outline: 2px solid var(--color-sage);
+      outline-offset: 4px;
+      border-radius: 2px;
+    }
+    
+    .hamburger-button {
+      display: flex;
+      width: 44px;
+      height: 44px;
+      align-items: center;
+      justify-content: center;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--color-charcoal);
+      transition: opacity var(--transition-smooth);
+      border-radius: 4px;
+    }
+    
+    .hamburger-button:hover,
+    .hamburger-button:focus-visible {
+      opacity: 0.6;
+    }
+    
+    .hamburger-button:focus-visible {
+      outline: 2px solid var(--color-sage);
+      outline-offset: 2px;
+    }
+    
+    /* Mobile Menu */
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      max-width: 320px;
+      height: 100vh;
+      height: 100svh;
+      background: var(--color-white);
+      box-shadow: 4px 0 24px oklch(0% 0 0 / 0.15);
+      transform: translateX(-100%);
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 1001;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+    }
+    
+    .mobile-menu.is-open {
+      transform: translateX(0);
+    }
+    
+    .mobile-menu-overlay {
+      position: fixed;
+      inset: 0;
+      background: oklch(25% 0.01 270 / 0.5);
+      backdrop-filter: blur(4px);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+      z-index: 1000;
+    }
+    
+    .mobile-menu-overlay.is-visible {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .mobile-menu-header {
+      padding: var(--spacing-md) var(--spacing-lg);
+      border-bottom: 1px solid oklch(90% 0.01 85);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .mobile-menu-logo {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      color: var(--color-charcoal);
+    }
+    
+    .mobile-menu-close {
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--color-charcoal);
+      transition: opacity var(--transition-smooth);
+      border-radius: 4px;
+    }
+    
+    .mobile-menu-close:hover,
+    .mobile-menu-close:focus-visible {
+      opacity: 0.6;
+    }
+    
+    .mobile-menu-close:focus-visible {
+      outline: 2px solid var(--color-sage);
+      outline-offset: 2px;
+    }
+    
+    .mobile-menu-nav {
+      padding: var(--spacing-lg);
+    }
+    
+    .mobile-nav-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    
+    .mobile-nav-item {
+      border-bottom: 1px solid oklch(90% 0.01 85);
+    }
+    
+    .mobile-nav-link {
+      display: block;
+      padding: var(--spacing-md) 0;
+      font-size: 1.125rem;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      text-decoration: none;
+      color: var(--color-charcoal);
+      transition: color var(--transition-smooth);
+    }
+    
+    .mobile-nav-link:hover,
+    .mobile-nav-link:focus-visible {
+      color: var(--color-sage);
+    }
+    
+    .mobile-nav-link:focus-visible {
+      outline: 2px solid var(--color-sage);
+      outline-offset: 4px;
+      border-radius: 2px;
+    }
+    
+    .mobile-menu-footer {
+      margin-top: auto;
+      padding: var(--spacing-lg);
+      border-top: 1px solid oklch(90% 0.01 85);
+    }
+    
+    .mobile-menu-actions {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-sm);
+    }
+    
+    .mobile-menu-btn {
+      width: 100%;
+      padding: 0.875rem;
+      font-family: var(--font-sans);
+      font-size: 0.9375rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-align: center;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--spacing-xs);
+      border-radius: 2px;
+      transition: all var(--transition-smooth);
+      min-height: 44px;
+    }
+    
+    .mobile-menu-btn-primary {
+      background: var(--color-charcoal);
+      color: var(--color-white);
+      border: 2px solid var(--color-charcoal);
+    }
+    
+    .mobile-menu-btn-primary:hover,
+    .mobile-menu-btn-primary:focus-visible {
+      background: var(--color-sage);
+      border-color: var(--color-sage);
+      color: var(--color-charcoal);
+    }
+    
+    .mobile-menu-btn-secondary {
+      background: transparent;
+      color: var(--color-charcoal);
+      border: 2px solid oklch(85% 0.01 85);
+    }
+    
+    .mobile-menu-btn-secondary:hover,
+    .mobile-menu-btn-secondary:focus-visible {
+      border-color: var(--color-charcoal);
+    }
+    
+    .mobile-menu-btn:focus-visible {
+      outline: 2px solid var(--color-sage);
+      outline-offset: 4px;
+    }
+    
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      justify-self: end;
+    }
+    
+    .icon-button {
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--color-charcoal);
+      transition: opacity var(--transition-smooth);
+      border-radius: 4px;
+    }
+    
+    .icon-button.search-button,
+    .icon-button.account-button {
+      display: none;
+    }
+    
+    .icon-button:hover,
+    .icon-button:focus-visible {
+      opacity: 0.6;
+    }
+    
+    .icon-button:focus-visible {
+      outline: 2px solid var(--color-sage);
+      outline-offset: 2px;
+    }
+    
+    .cart-count {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: var(--color-terracotta);
+      color: var(--color-white);
+      font-size: 0.625rem;
+      font-weight: 600;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    /* Hero Section */
+    .hero {
+      position: relative;
+      min-height: 85vh;
+      min-height: 85svh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+    
+    .hero-background {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+    
+    .hero-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.85);
+    }
+    
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 1440px;
+      width: 100%;
+      margin: 0 auto;
+      padding: var(--spacing-xl) var(--spacing-md);
+      color: var(--color-white);
+    }
+    
+    .hero-title {
+      font-family: var(--font-serif);
+      font-size: clamp(2.5rem, 8vw, 5rem);
+      font-weight: 400;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: var(--spacing-md);
+      max-width: 20ch;
+    }
+    
+    .hero-subtitle {
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      font-weight: 300;
+      letter-spacing: 0.02em;
+      margin-bottom: var(--spacing-lg);
+      max-width: 40ch;
+      line-height: 1.5;
+    }
+    
+    .btn {
+      display: inline-block;
+      padding: 0.875rem 2rem;
+      font-family: var(--font-sans);
+      font-size: 0.9375rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-decoration: none;
+      text-transform: uppercase;
+      border: 2px solid;
+      border-radius: 0;
+      cursor: pointer;
+      transition: all var(--transition-smooth);
+      min-width: 44px;
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .btn-primary {
+      background: var(--color-white);
+      color: var(--color-charcoal);
+      border-color: var(--color-white);
+    }
+    
+    .btn-primary:hover,
+    .btn-primary:focus-visible {
+      background: transparent;
+      color: var(--color-white);
+    }
+    
+    .btn-secondary {
+      background: transparent;
+      color: var(--color-charcoal);
+      border-color: var(--color-charcoal);
+    }
+    
+    .btn-secondary:hover,
+    .btn-secondary:focus-visible {
+      background: var(--color-charcoal);
+      color: var(--color-white);
+    }
+    
+    .btn:focus-visible {
+      outline: 2px solid var(--color-sage);
+      outline-offset: 4px;
+    }
+    
+    /* Collections Section */
+    .collections {
+      padding: var(--spacing-xl) var(--spacing-md);
+      max-width: 1440px;
+      margin: 0 auto;
+    }
+    
+    .section-header {
+      text-align: center;
+      margin-bottom: var(--spacing-xl);
+    }
+    
+    .section-title {
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      margin-bottom: var(--spacing-sm);
+      color: var(--color-charcoal);
+    }
+    
+    .section-description {
+      font-size: 1.0625rem;
+      font-weight: 300;
+      color: oklch(40% 0.01 270);
+      max-width: 50ch;
+      margin: 0 auto;
+    }
+    
+    .collection-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--spacing-md);
+    }
+    
+    .collection-card {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 3 / 4;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: transform var(--transition-smooth);
+    }
+    
+    .collection-card:hover,
+    .collection-card:focus-within {
+      transform: translateY(-4px);
+    }
+    
+    .collection-card:focus-visible {
+      outline: 2px solid var(--color-sage);
+      outline-offset: 4px;
+    }
+    
+    .collection-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .collection-card:hover .collection-image {
+      transform: scale(1.05);
+    }
+    
+    .collection-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, oklch(25% 0.01 270 / 0.8), transparent 60%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: var(--spacing-md);
+      color: var(--color-white);
+    }
+    
+    .collection-name {
+      font-family: var(--font-serif);
+      font-size: 1.75rem;
+      font-weight: 500;
+      margin-bottom: var(--spacing-xs);
+      letter-spacing: 0.02em;
+    }
+    
+    .collection-count {
+      font-size: 0.875rem;
+      font-weight: 300;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    
+    /* Product Grid */
+    .products {
+      padding: var(--spacing-xl) var(--spacing-md);
+      max-width: 1440px;
+      margin: 0 auto;
+    }
+    
+    .product-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--spacing-lg);
+    }
+    
+    .product-card {
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      color: inherit;
+      transition: transform var(--transition-smooth);
+    }
+    
+    .product-card:hover,
+    .product-card:focus-visible {
+      transform: translateY(-4px);
+    }
+    
+    .product-card:focus-visible {
+      outline: 2px solid var(--color-sage);
+      outline-offset: 4px;
+      border-radius: 2px;
+    }
+    
+    .product-image-wrapper {
+      position: relative;
+      aspect-ratio: 3 / 4;
+      overflow: hidden;
+      background: oklch(90% 0.01 85);
+      margin-bottom: var(--spacing-sm);
+      border-radius: 2px;
+    }
+    
+    .product-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .product-card:hover .product-image {
+      transform: scale(1.05);
+    }
+    
+    .product-badge {
+      position: absolute;
+      top: var(--spacing-sm);
+      left: var(--spacing-sm);
+      background: var(--color-terracotta);
+      color: var(--color-white);
+      padding: 0.375rem 0.75rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    
+    .product-info {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-xs);
+    }
+    
+    .product-name {
+      font-size: 1.0625rem;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+    }
+    
+    .product-category {
+      font-size: 0.875rem;
+      color: oklch(50% 0.01 270);
+      font-weight: 300;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    
+    .product-price {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--color-charcoal);
+    }
+    
+    /* Footer */
+    .site-footer {
+      background: var(--color-charcoal);
+      color: var(--color-cream);
+      padding: var(--spacing-xl) var(--spacing-md) var(--spacing-md);
+    }
+    
+    .footer-content {
+      max-width: 1440px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--spacing-xl);
+    }
+    
+    .footer-brand {
+      margin-bottom: 0;
+      grid-column: 1 / -1;
+    }
+    
+    .footer-logo {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      margin-bottom: var(--spacing-sm);
+    }
+    
+    .footer-tagline {
+      font-size: 0.9375rem;
+      font-weight: 300;
+      line-height: 1.6;
+      opacity: 0.8;
+    }
+    
+    .footer-section h3 {
+      font-family: var(--font-sans);
+      font-size: 0.875rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: var(--spacing-md);
+      opacity: 0.9;
+    }
+    
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-sm);
+    }
+    
+    .footer-link {
+      color: var(--color-cream);
+      text-decoration: none;
+      font-size: 0.9375rem;
+      font-weight: 300;
+      transition: opacity var(--transition-smooth);
+      display: inline-block;
+      opacity: 0.85;
+    }
+    
+    .footer-link:hover,
+    .footer-link:focus-visible {
+      opacity: 1;
+    }
+    
+    .footer-link:focus-visible {
+      outline: 2px solid var(--color-sage);
+      outline-offset: 4px;
+      border-radius: 2px;
+    }
+    
+    .footer-newsletter {
+      grid-column: 1 / -1;
+      padding-top: var(--spacing-lg);
+      border-top: 1px solid oklch(35% 0.01 270);
+      max-width: 600px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    
+    .footer-newsletter h3 {
+      text-align: center;
+    }
+    
+    .footer-newsletter .footer-tagline {
+      text-align: center;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    
+    .newsletter-form {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-sm);
+      margin-top: var(--spacing-md);
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .newsletter-input {
+      flex: 1;
+      padding: 0.875rem 1rem;
+      font-family: var(--font-sans);
+      font-size: 0.9375rem;
+      background: oklch(30% 0.01 270);
+      border: 1px solid oklch(40% 0.01 270);
+      color: var(--color-cream);
+      border-radius: 2px;
+      min-height: 48px;
+    }
+    
+    .newsletter-input::placeholder {
+      color: oklch(60% 0.01 270);
+    }
+    
+    .newsletter-input:focus-visible {
+      outline: 2px solid var(--color-sage);
+      outline-offset: 2px;
+      background: oklch(32% 0.01 270);
+    }
+    
+    .newsletter-button {
+      padding: 0.875rem 1.5rem;
+      background: var(--color-sage);
+      color: var(--color-charcoal);
+      border: none;
+      font-family: var(--font-sans);
+      font-size: 0.875rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background var(--transition-smooth);
+      border-radius: 2px;
+      min-width: 100%;
+      min-height: 48px;
+    }
+    
+    .newsletter-button:hover,
+    .newsletter-button:focus-visible {
+      background: var(--color-gold);
+    }
+    
+    .newsletter-button:focus-visible {
+      outline: 2px solid var(--color-sage);
+      outline-offset: 2px;
+    }
+    
+    .footer-bottom {
+      max-width: 1440px;
+      margin: var(--spacing-xl) auto 0;
+      padding-top: var(--spacing-lg);
+      border-top: 1px solid oklch(35% 0.01 270);
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-md);
+      align-items: center;
+      text-align: center;
+      font-size: 0.8125rem;
+      opacity: 0.7;
+    }
+    
+    .footer-bottom p {
+      margin: 0;
+      line-height: 1.6;
+    }
+    
+    .social-links {
+      display: flex;
+      gap: var(--spacing-xs);
+      list-style: none;
+    }
+    
+    .social-link {
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-cream);
+      transition: opacity var(--transition-smooth);
+      border-radius: 4px;
+    }
+    
+    .social-link:hover,
+    .social-link:focus-visible {
+      opacity: 0.7;
+    }
+    
+    .social-link:focus-visible {
+      outline: 2px solid var(--color-sage);
+      outline-offset: 2px;
+    }
+    
+    /* Cart Drawer */
+    .cart-drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 100%;
+      max-width: 480px;
+      height: 100vh;
+      height: 100svh;
+      background: var(--color-white);
+      box-shadow: -4px 0 24px oklch(0% 0 0 / 0.15);
+      transform: translateX(100%);
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    
+    .cart-drawer.is-open {
+      transform: translateX(0);
+    }
+    
+    .cart-overlay {
+      position: fixed;
+      inset: 0;
+      background: oklch(25% 0.01 270 / 0.5);
+      backdrop-filter: blur(4px);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+      z-index: 999;
+    }
+    
+    .cart-overlay.is-visible {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .cart-header {
+      padding: var(--spacing-md) var(--spacing-lg);
+      border-bottom: 1px solid oklch(90% 0.01 85);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+    
+    .cart-title {
+      font-family: var(--font-serif);
+      font-size: 1.75rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+    
+    .cart-close {
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--color-charcoal);
+      transition: opacity var(--transition-smooth);
+      border-radius: 4px;
+    }
+    
+    .cart-close:hover,
+    .cart-close:focus-visible {
+      opacity: 0.6;
+    }
+    
+    .cart-close:focus-visible {
+      outline: 2px solid var(--color-sage);
+      outline-offset: 2px;
+    }
+    
+    .cart-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: var(--spacing-lg);
+    }
+    
+    .cart-empty {
+      text-align: center;
+      padding: var(--spacing-xl) var(--spacing-md);
+    }
+    
+    .cart-empty-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto var(--spacing-md);
+      opacity: 0.3;
+    }
+    
+    .cart-empty-text {
+      font-size: 1.0625rem;
+      color: oklch(50% 0.01 270);
+      margin-bottom: var(--spacing-md);
+    }
+    
+    .cart-items {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-md);
+    }
+    
+    .cart-item {
+      display: grid;
+      grid-template-columns: 100px 1fr auto;
+      gap: var(--spacing-md);
+      padding-bottom: var(--spacing-md);
+      border-bottom: 1px solid oklch(90% 0.01 85);
+    }
+    
+    .cart-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+    
+    .cart-item-image {
+      width: 100px;
+      height: 130px;
+      object-fit: cover;
+      border-radius: 2px;
+      background: oklch(95% 0.01 85);
+    }
+    
+    .cart-item-details {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-xs);
+    }
+    
+    .cart-item-name {
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--color-charcoal);
+      margin-bottom: 0.25rem;
+    }
+    
+    .cart-item-meta {
+      font-size: 0.875rem;
+      color: oklch(50% 0.01 270);
+    }
+    
+    .cart-item-price {
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: var(--color-charcoal);
+      margin-top: auto;
+    }
+    
+    .cart-item-actions {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      justify-content: space-between;
+    }
+    
+    .cart-item-remove {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: oklch(50% 0.01 270);
+      transition: color var(--transition-smooth);
+      border-radius: 4px;
+    }
+    
+    .cart-item-remove:hover,
+    .cart-item-remove:focus-visible {
+      color: var(--color-terracotta);
+    }
+    
+    .cart-item-remove:focus-visible {
+      outline: 2px solid var(--color-sage);
+      outline-offset: 2px;
+    }
+    
+    .quantity-control {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-xs);
+      border: 1px solid oklch(85% 0.01 85);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    
+    .quantity-btn {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--color-charcoal);
+      transition: background var(--transition-smooth);
+      font-size: 1.125rem;
+      font-weight: 400;
+    }
+    
+    .quantity-btn:hover:not(:disabled) {
+      background: oklch(95% 0.01 85);
+    }
+    
+    .quantity-btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+    
+    .quantity-btn:focus-visible {
+      outline: 2px solid var(--color-sage);
+      outline-offset: -2px;
+    }
+    
+    .quantity-value {
+      min-width: 32px;
+      text-align: center;
+      font-size: 0.9375rem;
+      font-weight: 500;
+    }
+    
+    .cart-footer {
+      padding: var(--spacing-lg);
+      border-top: 1px solid oklch(90% 0.01 85);
+      background: oklch(98% 0.01 85);
+      flex-shrink: 0;
+    }
+    
+    .cart-subtotal {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--spacing-sm);
+      font-size: 1.0625rem;
+    }
+    
+    .cart-subtotal-label {
+      font-weight: 400;
+      color: oklch(40% 0.01 270);
+    }
+    
+    .cart-subtotal-value {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--color-charcoal);
+    }
+    
+    .cart-shipping-note {
+      font-size: 0.8125rem;
+      color: oklch(50% 0.01 270);
+      margin-bottom: var(--spacing-md);
+      text-align: center;
+    }
+    
+    .cart-checkout-btn {
+      width: 100%;
+      padding: 1rem;
+      font-family: var(--font-sans);
+      font-size: 0.9375rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      background: var(--color-charcoal);
+      color: var(--color-white);
+      border: 2px solid var(--color-charcoal);
+      cursor: pointer;
+      transition: all var(--transition-smooth);
+      border-radius: 2px;
+      min-height: 52px;
+    }
+    
+    .cart-checkout-btn:hover,
+    .cart-checkout-btn:focus-visible {
+      background: var(--color-sage);
+      border-color: var(--color-sage);
+      color: var(--color-charcoal);
+    }
+    
+    .cart-checkout-btn:focus-visible {
+      outline: 2px solid var(--color-sage);
+      outline-offset: 4px;
+    }
+    
+    .cart-continue {
+      width: 100%;
+      margin-top: var(--spacing-sm);
+      padding: 0.75rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      background: none;
+      color: var(--color-charcoal);
+      border: none;
+      cursor: pointer;
+      transition: opacity var(--transition-smooth);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+    
+    .cart-continue:hover,
+    .cart-continue:focus-visible {
+      opacity: 0.6;
+    }
+    
+    .cart-continue:focus-visible {
+      outline: 2px solid var(--color-sage);
+      outline-offset: 4px;
+      border-radius: 2px;
+    }
+    
+    /* Responsive Breakpoints */
+    @media (min-width: 390px) {
+      .hero-content {
+        padding: var(--spacing-xl) var(--spacing-lg);
+      }
+      
+      .collections,
+      .products {
+        padding: var(--spacing-xl) var(--spacing-lg);
+      }
+    }
+    
+    @media (max-width: 449px) {
+      .footer-content {
+        grid-template-columns: 1fr;
+      }
+      
+      .footer-brand {
+        grid-column: 1;
+      }
+    }
+    
+    @media (min-width: 450px) {
+      .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .newsletter-form {
+        flex-direction: row;
+        gap: var(--spacing-sm);
+      }
+      
+      .newsletter-button {
+        min-width: auto;
+        white-space: nowrap;
+      }
+    }
+    
+    @media (min-width: 768px) {
+      .header-content {
+        padding: var(--spacing-md) var(--spacing-lg);
+        display: flex;
+        justify-content: space-between;
+      }
+      
+      .logo {
+        text-align: left;
+        justify-self: start;
+      }
+      
+      .main-nav {
+        display: block;
+      }
+      
+      .hamburger-button {
+        display: none;
+      }
+      
+      .header-actions {
+        gap: var(--spacing-sm);
+      }
+      
+      .icon-button.search-button,
+      .icon-button.account-button {
+        display: flex;
+      }
+      
+      .collection-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--spacing-lg);
+      }
+      
+      .footer-content {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      
+      .footer-brand {
+        grid-column: 1 / -1;
+      }
+      
+      .footer-newsletter {
+        grid-column: 1 / -1;
+      }
+      
+      .footer-bottom {
+        flex-direction: row;
+        justify-content: space-between;
+        text-align: left;
+      }
+    }
+    
+    @media (min-width: 1024px) {
+      .collection-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      
+      .product-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      
+      .footer-content {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      
+      .footer-brand {
+        grid-column: 1 / -1;
+      }
+      
+      .footer-newsletter {
+        grid-column: 1 / -1;
+      }
+    }
+    
+    @media (min-width: 1280px) {
+      .product-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+      
+      .footer-content {
+        grid-template-columns: 2fr repeat(3, 1fr);
+      }
+      
+      .footer-brand {
+        grid-column: auto;
+      }
+    }
+    
+    /* Loading State */
+    @keyframes shimmer {
+      0% {
+        background-position: -1000px 0;
+      }
+      100% {
+        background-position: 1000px 0;
+      }
+    }
+    
+    .loading-shimmer {
+      background: linear-gradient(90deg, oklch(90% 0.01 85) 25%, oklch(93% 0.01 85) 50%, oklch(90% 0.01 85) 75%);
+      background-size: 1000px 100%;
+      animation: shimmer 2s infinite;
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header" role="banner">
+    <div class="header-content">
+      <button class="hamburger-button" aria-label="Open menu" id="hamburgerButton" type="button">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+      
+      <a href="/" class="logo" aria-label="Atelier Home">Atelier</a>
+      
+      <nav class="main-nav" role="navigation" aria-label="Main navigation">
+        <ul class="nav-list">
+          <li><a href="#new" class="nav-link">New Arrivals</a></li>
+          <li><a href="#collections" class="nav-link">Collections</a></li>
+          <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+      
+      <div class="header-actions">
+        <button class="icon-button search-button" aria-label="Search" type="button">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <circle cx="8" cy="8" r="6"/>
+            <path d="M13 13l5 5"/>
+          </svg>
+        </button>
+        <button class="icon-button account-button" aria-label="Account" type="button">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <circle cx="10" cy="6" r="4"/>
+            <path d="M3 20c0-4.418 3.134-8 7-8s7 3.582 7 8"/>
+          </svg>
+        </button>
+        <button class="icon-button" aria-label="Shopping cart, 3 items" type="button" style="position: relative;" id="cartButton">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <path d="M1 1h3l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L19 5H5"/>
+            <circle cx="8" cy="18" r="1"/>
+            <circle cx="16" cy="18" r="1"/>
+          </svg>
+          <span class="cart-count" aria-hidden="true">3</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="mobile-menu-overlay" id="mobileMenuOverlay" aria-hidden="true"></div>
+
+  <!-- Mobile Menu -->
+  <nav class="mobile-menu" id="mobileMenu" role="dialog" aria-labelledby="mobile-menu-title" aria-modal="true">
+    <div class="mobile-menu-header">
+      <div id="mobile-menu-title" class="mobile-menu-logo">Atelier</div>
+      <button class="mobile-menu-close" aria-label="Close menu" id="closeMobileMenu" type="button">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="18" y1="6" x2="6" y2="18"/>
+          <line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="mobile-menu-nav">
+      <ul class="mobile-nav-list">
+        <li class="mobile-nav-item"><a href="#new" class="mobile-nav-link">New Arrivals</a></li>
+        <li class="mobile-nav-item"><a href="#collections" class="mobile-nav-link">Collections</a></li>
+        <li class="mobile-nav-item"><a href="#about" class="mobile-nav-link">About</a></li>
+        <li class="mobile-nav-item"><a href="#contact" class="mobile-nav-link">Contact</a></li>
+        <li class="mobile-nav-item"><a href="#sale" class="mobile-nav-link">Sale</a></li>
+        <li class="mobile-nav-item"><a href="#stores" class="mobile-nav-link">Store Locations</a></li>
+      </ul>
+    </div>
+
+    <div class="mobile-menu-footer">
+      <div class="mobile-menu-actions">
+        <a href="#account" class="mobile-menu-btn mobile-menu-btn-primary">
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <circle cx="10" cy="6" r="4"/>
+            <path d="M3 20c0-4.418 3.134-8 7-8s7 3.582 7 8"/>
+          </svg>
+          Sign In
+        </a>
+        <a href="#search" class="mobile-menu-btn mobile-menu-btn-secondary">
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <circle cx="8" cy="8" r="6"/>
+            <path d="M13 13l5 5"/>
+          </svg>
+          Search
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Cart Overlay -->
+  <div class="cart-overlay" id="cartOverlay" aria-hidden="true"></div>
+
+  <!-- Cart Drawer -->
+  <aside class="cart-drawer" id="cartDrawer" role="dialog" aria-labelledby="cart-title" aria-modal="true">
+    <div class="cart-header">
+      <h2 id="cart-title" class="cart-title">Shopping Cart</h2>
+      <button class="cart-close" aria-label="Close cart" id="closeCart" type="button">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="18" y1="6" x2="6" y2="18"/>
+          <line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="cart-body" id="cartBody">
+      <!-- Cart items will be injected here -->
+    </div>
+
+    <div class="cart-footer" id="cartFooter">
+      <div class="cart-subtotal">
+        <span class="cart-subtotal-label">Subtotal</span>
+        <span class="cart-subtotal-value" id="cartSubtotal">$0</span>
+      </div>
+      <p class="cart-shipping-note">Shipping and taxes calculated at checkout</p>
+      <button class="cart-checkout-btn" type="button">Proceed to Checkout</button>
+      <button class="cart-continue" id="continueBtn" type="button">Continue Shopping</button>
+    </div>
+  </aside>
+
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-background">
+        <img 
+          src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1600&h=1200&fit=crop&q=85" 
+          alt="" 
+          class="hero-image"
+          width="1600"
+          height="1200"
+          fetchpriority="high"
+        >
+      </div>
+      <div class="hero-content">
+        <h1 id="hero-title" class="hero-title">Curated Elegance for the Modern Wardrobe</h1>
+        <p class="hero-subtitle">Discover our latest collection of thoughtfully selected pieces that blend timeless design with contemporary sensibility.</p>
+        <a href="#collections" class="btn btn-primary">Explore Collection</a>
+      </div>
+    </section>
+
+    <section id="collections" class="collections" aria-labelledby="collections-title">
+      <div class="section-header">
+        <h2 id="collections-title" class="section-title">Featured Collections</h2>
+        <p class="section-description">Each collection is carefully curated to bring you pieces that transcend trends and embrace enduring style.</p>
+      </div>
+      
+      <div class="collection-grid">
+        <a href="#spring" class="collection-card" tabindex="0">
+          <img 
+            src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&h=800&fit=crop&q=85" 
+            alt="" 
+            class="collection-image"
+            loading="lazy"
+            decoding="async"
+            width="600"
+            height="800"
+          >
+          <div class="collection-overlay">
+            <h3 class="collection-name">Spring Essentials</h3>
+            <p class="collection-count">24 Pieces</p>
+          </div>
+        </a>
+        
+        <a href="#minimal" class="collection-card" tabindex="0">
+          <img 
+            src="https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=600&h=800&fit=crop&q=85" 
+            alt="" 
+            class="collection-image"
+            loading="lazy"
+            decoding="async"
+            width="600"
+            height="800"
+          >
+          <div class="collection-overlay">
+            <h3 class="collection-name">Minimal Luxe</h3>
+            <p class="collection-count">18 Pieces</p>
+          </div>
+        </a>
+        
+        <a href="#evening" class="collection-card" tabindex="0">
+          <img 
+            src="https://images.unsplash.com/photo-1539008835657-9e8e9680c956?w=600&h=800&fit=crop&q=85" 
+            alt="" 
+            class="collection-image"
+            loading="lazy"
+            decoding="async"
+            width="600"
+            height="800"
+          >
+          <div class="collection-overlay">
+            <h3 class="collection-name">Evening Edit</h3>
+            <p class="collection-count">15 Pieces</p>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <section class="products" aria-labelledby="products-title">
+      <div class="section-header">
+        <h2 id="products-title" class="section-title">New Arrivals</h2>
+        <p class="section-description">The newest additions to our carefully curated selection.</p>
+      </div>
+      
+      <div class="product-grid">
+        <a href="#product1" class="product-card">
+          <div class="product-image-wrapper">
+            <span class="product-badge">New</span>
+            <img 
+              src="https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=500&h=700&fit=crop&q=85" 
+              alt="Linen blend blazer in natural beige" 
+              class="product-image"
+              loading="lazy"
+              decoding="async"
+              width="500"
+              height="700"
+            >
+          </div>
+          <div class="product-info">
+            <p class="product-category">Outerwear</p>
+            <h3 class="product-name">Linen Blend Blazer</h3>
+            <p class="product-price">$285</p>
+          </div>
+        </a>
+        
+        <a href="#product2" class="product-card">
+          <div class="product-image-wrapper">
+            <img 
+              src="https://images.unsplash.com/photo-1596783074918-c84cb06531ca?w=500&h=700&fit=crop&q=85" 
+              alt="Silk midi dress in sage green" 
+              class="product-image"
+              loading="lazy"
+              decoding="async"
+              width="500"
+              height="700"
+            >
+          </div>
+          <div class="product-info">
+            <p class="product-category">Dresses</p>
+            <h3 class="product-name">Silk Midi Dress</h3>
+            <p class="product-price">$345</p>
+          </div>
+        </a>
+        
+        <a href="#product3" class="product-card">
+          <div class="product-image-wrapper">
+            <span class="product-badge">New</span>
+            <img 
+              src="https://images.unsplash.com/photo-1578932750355-5eb30ece487a?w=500&h=700&fit=crop&q=85" 
+              alt="Cashmere turtleneck sweater in ivory" 
+              class="product-image"
+              loading="lazy"
+              decoding="async"
+              width="500"
+              height="700"
+            >
+          </div>
+          <div class="product-info">
+            <p class="product-category">Knitwear</p>
+            <h3 class="product-name">Cashmere Turtleneck</h3>
+            <p class="product-price">$425</p>
+          </div>
+        </a>
+        
+        <a href="#product4" class="product-card">
+          <div class="product-image-wrapper">
+            <img 
+              src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=500&h=700&fit=crop&q=85" 
+              alt="Wide leg trousers in charcoal wool" 
+              class="product-image"
+              loading="lazy"
+              decoding="async"
+              width="500"
+              height="700"
+            >
+          </div>
+          <div class="product-info">
+            <p class="product-category">Bottoms</p>
+            <h3 class="product-name">Wide Leg Trousers</h3>
+            <p class="product-price">$225</p>
+          </div>
+        </a>
+        
+        <a href="#product5" class="product-card">
+          <div class="product-image-wrapper">
+            <img 
+              src="https://images.unsplash.com/photo-1617127365659-c47fa864d8bc?w=500&h=700&fit=crop&q=85" 
+              alt="Structured leather tote in cognac" 
+              class="product-image"
+              loading="lazy"
+              decoding="async"
+              width="500"
+              height="700"
+            >
+          </div>
+          <div class="product-info">
+            <p class="product-category">Accessories</p>
+            <h3 class="product-name">Structured Leather Tote</h3>
+            <p class="product-price">$395</p>
+          </div>
+        </a>
+        
+        <a href="#product6" class="product-card">
+          <div class="product-image-wrapper">
+            <span class="product-badge">New</span>
+            <img 
+              src="https://images.unsplash.com/photo-1591369822096-ffd140ec948f?w=500&h=700&fit=crop&q=85" 
+              alt="Oversized cotton shirt in white" 
+              class="product-image"
+              loading="lazy"
+              decoding="async"
+              width="500"
+              height="700"
+            >
+          </div>
+          <div class="product-info">
+            <p class="product-category">Tops</p>
+            <h3 class="product-name">Oversized Cotton Shirt</h3>
+            <p class="product-price">$165</p>
+          </div>
+        </a>
+        
+        <a href="#product7" class="product-card">
+          <div class="product-image-wrapper">
+            <img 
+              src="https://images.unsplash.com/photo-1600950207944-0d63e8edbc3f?w=500&h=700&fit=crop&q=85" 
+              alt="Pleated midi skirt in terracotta" 
+              class="product-image"
+              loading="lazy"
+              decoding="async"
+              width="500"
+              height="700"
+            >
+          </div>
+          <div class="product-info">
+            <p class="product-category">Bottoms</p>
+            <h3 class="product-name">Pleated Midi Skirt</h3>
+            <p class="product-price">$195</p>
+          </div>
+        </a>
+        
+        <a href="#product8" class="product-card">
+          <div class="product-image-wrapper">
+            <img 
+              src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=500&h=700&fit=crop&q=85" 
+              alt="Merino wool cardigan in camel" 
+              class="product-image"
+              loading="lazy"
+              decoding="async"
+              width="500"
+              height="700"
+            >
+          </div>
+          <div class="product-info">
+            <p class="product-category">Knitwear</p>
+            <h3 class="product-name">Merino Wool Cardigan</h3>
+            <p class="product-price">$295</p>
+          </div>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-content">
+      <div class="footer-newsletter">
+        <h3>Stay Connected</h3>
+        <p class="footer-tagline">Subscribe to receive updates on new arrivals, exclusive offers, and style inspiration.</p>
+        <form class="newsletter-form" aria-label="Newsletter signup">
+          <label for="newsletter-email" class="visually-hidden">Email address</label>
+          <input 
+            type="email" 
+            id="newsletter-email"
+            class="newsletter-input" 
+            placeholder="Enter your email"
+            required
+            aria-required="true"
+          >
+          <button type="submit" class="newsletter-button">Subscribe</button>
+        </form>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Shop</h3>
+        <ul class="footer-links">
+          <li><a href="#new" class="footer-link">New Arrivals</a></li>
+          <li><a href="#collections" class="footer-link">Collections</a></li>
+          <li><a href="#sale" class="footer-link">Sale</a></li>
+          <li><a href="#gift" class="footer-link">Gift Cards</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-section">
+        <h3>About</h3>
+        <ul class="footer-links">
+          <li><a href="#story" class="footer-link">Our Story</a></li>
+          <li><a href="#sustainability" class="footer-link">Sustainability</a></li>
+          <li><a href="#stores" class="footer-link">Store Locations</a></li>
+          <li><a href="#careers" class="footer-link">Careers</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Customer Care</h3>
+        <ul class="footer-links">
+          <li><a href="#contact" class="footer-link">Contact Us</a></li>
+          <li><a href="#shipping" class="footer-link">Shipping & Returns</a></li>
+          <li><a href="#sizing" class="footer-link">Size Guide</a></li>
+          <li><a href="#faq" class="footer-link">FAQ</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-brand">
+        <div class="footer-logo">Atelier</div>
+        <p class="footer-tagline">An independent boutique dedicated to curating timeless pieces that celebrate quality, craftsmanship, and conscious style.</p>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>&copy; 2025 Atelier. All rights reserved. Crafted by <strong>HC Web Labs</strong>.</p>
+      <ul class="social-links">
+        <li>
+          <a href="#instagram" class="social-link" aria-label="Instagram">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+              <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+            </svg>
+          </a>
+        </li>
+        <li>
+          <a href="#pinterest" class="social-link" aria-label="Pinterest">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M8 12c0-3.3 1.8-6 5-6 2.2 0 4 1.3 4 3.5 0 2.4-1.3 4.5-3 4.5-.8 0-1.5-.4-1.5-1.2 0-1 .7-2 .7-3 0-.7-.4-1.3-1.2-1.3-1 0-1.8 1-1.8 2.3 0 .8.3 1.4.3 1.4L9 18"/>
+            </svg>
+          </a>
+        </li>
+        <li>
+          <a href="#facebook" class="social-link" aria-label="Facebook">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/>
+            </svg>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </footer>
+
+  <script type="module">
+    // Mobile Menu Management
+    const hamburgerButton = document.getElementById('hamburgerButton');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+    const closeMobileMenuBtn = document.getElementById('closeMobileMenu');
+
+    function openMobileMenu() {
+      mobileMenu.classList.add('is-open');
+      mobileMenuOverlay.classList.add('is-visible');
+      mobileMenu.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      closeMobileMenuBtn.focus();
+    }
+
+    function closeMobileMenu() {
+      mobileMenu.classList.remove('is-open');
+      mobileMenuOverlay.classList.remove('is-visible');
+      mobileMenu.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      hamburgerButton.focus();
+    }
+
+    if (hamburgerButton) {
+      hamburgerButton.addEventListener('click', openMobileMenu);
+    }
+
+    if (closeMobileMenuBtn) {
+      closeMobileMenuBtn.addEventListener('click', closeMobileMenu);
+    }
+
+    if (mobileMenuOverlay) {
+      mobileMenuOverlay.addEventListener('click', closeMobileMenu);
+    }
+
+    // Close mobile menu when clicking nav links
+    document.querySelectorAll('.mobile-nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        closeMobileMenu();
+      });
+    });
+
+    // Trap focus in mobile menu
+    mobileMenu.addEventListener('keydown', (e) => {
+      if (e.key === 'Tab' && mobileMenu.classList.contains('is-open')) {
+        const focusableElements = mobileMenu.querySelectorAll(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
+        const firstElement = focusableElements[0];
+        const lastElement = focusableElements[focusableElements.length - 1];
+
+        if (e.shiftKey && document.activeElement === firstElement) {
+          e.preventDefault();
+          lastElement.focus();
+        } else if (!e.shiftKey && document.activeElement === lastElement) {
+          e.preventDefault();
+          firstElement.focus();
+        }
+      }
+    });
+
+    // Cart State Management
+    const cartState = {
+      items: [
+        {
+          id: 1,
+          name: 'Linen Blend Blazer',
+          category: 'Outerwear',
+          price: 285,
+          quantity: 1,
+          size: 'M',
+          color: 'Natural Beige',
+          image: 'https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=300&h=400&fit=crop&q=85'
+        },
+        {
+          id: 2,
+          name: 'Silk Midi Dress',
+          category: 'Dresses',
+          price: 345,
+          quantity: 1,
+          size: 'S',
+          color: 'Sage Green',
+          image: 'https://images.unsplash.com/photo-1596783074918-c84cb06531ca?w=300&h=400&fit=crop&q=85'
+        },
+        {
+          id: 3,
+          name: 'Cashmere Turtleneck',
+          category: 'Knitwear',
+          price: 425,
+          quantity: 1,
+          size: 'M',
+          color: 'Ivory',
+          image: 'https://images.unsplash.com/photo-1578932750355-5eb30ece487a?w=300&h=400&fit=crop&q=85'
+        }
+      ]
+    };
+
+    // DOM Elements
+    const cartButton = document.getElementById('cartButton');
+    const cartDrawer = document.getElementById('cartDrawer');
+    const cartOverlay = document.getElementById('cartOverlay');
+    const closeCartBtn = document.getElementById('closeCart');
+    const continueBtn = document.getElementById('continueBtn');
+    const cartBody = document.getElementById('cartBody');
+    const cartSubtotal = document.getElementById('cartSubtotal');
+    const cartCountEl = document.querySelector('.cart-count');
+
+    // Cart Functions
+    function openCart() {
+      cartDrawer.classList.add('is-open');
+      cartOverlay.classList.add('is-visible');
+      cartDrawer.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      closeCartBtn.focus();
+    }
+
+    function closeCart() {
+      cartDrawer.classList.remove('is-open');
+      cartOverlay.classList.remove('is-visible');
+      cartDrawer.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      cartButton.focus();
+    }
+
+    function updateCartCount() {
+      const totalItems = cartState.items.reduce((sum, item) => sum + item.quantity, 0);
+      if (cartCountEl) {
+        cartCountEl.textContent = totalItems;
+        if (totalItems > 0) {
+          cartCountEl.style.display = 'flex';
+        } else {
+          cartCountEl.style.display = 'none';
+        }
+      }
+      
+      // Update cart button aria-label
+      if (cartButton) {
+        cartButton.setAttribute('aria-label', `Shopping cart, ${totalItems} ${totalItems === 1 ? 'item' : 'items'}`);
+      }
+    }
+
+    function calculateSubtotal() {
+      return cartState.items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    }
+
+    function updateSubtotal() {
+      const subtotal = calculateSubtotal();
+      if (cartSubtotal) {
+        cartSubtotal.textContent = `${subtotal.toLocaleString()}`;
+      }
+    }
+
+    function updateQuantity(itemId, newQuantity) {
+      const item = cartState.items.find(i => i.id === itemId);
+      if (item && newQuantity > 0) {
+        item.quantity = newQuantity;
+        renderCart();
+        updateCartCount();
+        updateSubtotal();
+      }
+    }
+
+    function removeItem(itemId) {
+      const index = cartState.items.findIndex(i => i.id === itemId);
+      if (index !== -1) {
+        cartState.items.splice(index, 1);
+        renderCart();
+        updateCartCount();
+        updateSubtotal();
+      }
+    }
+
+    function renderCart() {
+      if (!cartBody) return;
+
+      if (cartState.items.length === 0) {
+        cartBody.innerHTML = `
+          <div class="cart-empty">
+            <svg class="cart-empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M1 1h3l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L19 5H5"/>
+              <circle cx="8" cy="20" r="1"/>
+              <circle cx="16" cy="20" r="1"/>
+            </svg>
+            <p class="cart-empty-text">Your cart is empty</p>
+            <button class="btn btn-secondary" onclick="document.getElementById('continueBtn').click()">Start Shopping</button>
+          </div>
+        `;
+        return;
+      }
+
+      const itemsHTML = cartState.items.map(item => `
+        <div class="cart-item" data-item-id="${item.id}">
+          <img 
+            src="${item.image}" 
+            alt="${item.name}" 
+            class="cart-item-image"
+            width="100"
+            height="130"
+            loading="lazy"
+          >
+          <div class="cart-item-details">
+            <h3 class="cart-item-name">${item.name}</h3>
+            <p class="cart-item-meta">${item.color} / Size ${item.size}</p>
+            <p class="cart-item-price">${item.price}</p>
+          </div>
+          <div class="cart-item-actions">
+            <button 
+              class="cart-item-remove" 
+              aria-label="Remove ${item.name} from cart"
+              data-item-id="${item.id}"
+              data-action="remove"
+              type="button"
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18"/>
+                <line x1="6" y1="6" x2="18" y2="18"/>
+              </svg>
+            </button>
+            <div class="quantity-control">
+              <button 
+                class="quantity-btn" 
+                aria-label="Decrease quantity"
+                data-item-id="${item.id}"
+                data-action="decrease"
+                type="button"
+                ${item.quantity <= 1 ? 'disabled' : ''}
+              >−</button>
+              <span class="quantity-value" aria-label="Quantity">${item.quantity}</span>
+              <button 
+                class="quantity-btn" 
+                aria-label="Increase quantity"
+                data-item-id="${item.id}"
+                data-action="increase"
+                type="button"
+              >+</button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+
+      cartBody.innerHTML = `<div class="cart-items">${itemsHTML}</div>`;
+
+      // Add event listeners to cart item buttons
+      cartBody.querySelectorAll('[data-action]').forEach(btn => {
+        btn.addEventListener('click', handleCartAction);
+      });
+    }
+
+    function handleCartAction(e) {
+      const button = e.currentTarget;
+      const itemId = parseInt(button.dataset.itemId);
+      const action = button.dataset.action;
+      const item = cartState.items.find(i => i.id === itemId);
+
+      if (!item) return;
+
+      switch (action) {
+        case 'increase':
+          updateQuantity(itemId, item.quantity + 1);
+          break;
+        case 'decrease':
+          updateQuantity(itemId, item.quantity - 1);
+          break;
+        case 'remove':
+          removeItem(itemId);
+          break;
+      }
+    }
+
+    // Event Listeners
+    if (cartButton) {
+      cartButton.addEventListener('click', openCart);
+    }
+
+    if (closeCartBtn) {
+      closeCartBtn.addEventListener('click', closeCart);
+    }
+
+    if (continueBtn) {
+      continueBtn.addEventListener('click', closeCart);
+    }
+
+    if (cartOverlay) {
+      cartOverlay.addEventListener('click', closeCart);
+    }
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        if (cartDrawer.classList.contains('is-open')) {
+          closeCart();
+        } else if (mobileMenu.classList.contains('is-open')) {
+          closeMobileMenu();
+        }
+      }
+    });
+
+    // Trap focus in cart drawer when open
+    cartDrawer.addEventListener('keydown', (e) => {
+      if (e.key === 'Tab' && cartDrawer.classList.contains('is-open')) {
+        const focusableElements = cartDrawer.querySelectorAll(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
+        const firstElement = focusableElements[0];
+        const lastElement = focusableElements[focusableElements.length - 1];
+
+        if (e.shiftKey && document.activeElement === firstElement) {
+          e.preventDefault();
+          lastElement.focus();
+        } else if (!e.shiftKey && document.activeElement === lastElement) {
+          e.preventDefault();
+          firstElement.focus();
+        }
+      }
+    });
+
+    // Initialize cart
+    renderCart();
+    updateCartCount();
+    updateSubtotal();
+
+    // Smooth scroll behavior for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // Newsletter form handling
+    const newsletterForm = document.querySelector('.newsletter-form');
+    if (newsletterForm) {
+      newsletterForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const input = newsletterForm.querySelector('.newsletter-input');
+        const button = newsletterForm.querySelector('.newsletter-button');
+        const originalText = button.textContent;
+        
+        button.textContent = 'Subscribing...';
+        button.disabled = true;
+        
+        // Simulate API call
+        await new Promise(resolve => setTimeout(resolve, 1500));
+        
+        button.textContent = 'Subscribed!';
+        input.value = '';
+        
+        setTimeout(() => {
+          button.textContent = originalText;
+          button.disabled = false;
+        }, 2000);
+      });
+    }
+
+    // Add intersection observer for fade-in animations
+    if ('IntersectionObserver' in window) {
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }
+        });
+      }, observerOptions);
+
+      // Observe product cards and collection cards
+      document.querySelectorAll('.product-card, .collection-card').forEach((el, index) => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(20px)';
+        el.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
+        observer.observe(el);
+      });
+    }
+
+    // View Transitions API support
+    if (document.startViewTransition) {
+      // Add smooth page transitions when navigating
+      document.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', (e) => {
+          const href = link.getAttribute('href');
+          if (href && href.startsWith('#')) {
+            // Already handled by smooth scroll
+            return;
+          }
+          
+          // For future full page navigation
+          // document.startViewTransition(() => {
+          //   // Navigation logic here
+          // });
+        });
+      });
+    }
+
+    // Cart functionality demo
+    let nextProductId = 4;
+
+    // Simulate adding items (for demo purposes)
+    document.querySelectorAll('.product-card').forEach((card, index) => {
+      card.addEventListener('dblclick', (e) => {
+        e.preventDefault();
+        
+        // Get product info from card
+        const productName = card.querySelector('.product-name')?.textContent || 'Product';
+        const productCategory = card.querySelector('.product-category')?.textContent || 'Item';
+        const productPriceText = card.querySelector('.product-price')?.textContent || '$0';
+        const productPrice = parseInt(productPriceText.replace(/\D/g, ''));
+        const productImage = card.querySelector('.product-image')?.src || '';
+
+        // Check if item already exists in cart
+        const existingItem = cartState.items.find(item => item.name === productName);
+        
+        if (existingItem) {
+          // Increase quantity if already in cart
+          updateQuantity(existingItem.id, existingItem.quantity + 1);
+        } else {
+          // Add new item to cart
+          cartState.items.push({
+            id: nextProductId++,
+            name: productName,
+            category: productCategory,
+            price: productPrice,
+            quantity: 1,
+            size: 'M',
+            color: 'Default',
+            image: productImage
+          });
+          renderCart();
+        }
+        
+        updateCartCount();
+        updateSubtotal();
+        
+        // Visual feedback
+        const countEl = document.querySelector('.cart-count');
+        if (countEl) {
+          countEl.style.transform = 'scale(1.3)';
+          setTimeout(() => {
+            countEl.style.transform = 'scale(1)';
+          }, 300);
+        }
+        
+        // Show a subtle notification
+        card.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+          card.style.transform = '';
+        }, 200);
+      });
+    });
+  </script>
+</body>
+</html>
